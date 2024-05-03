@@ -89,6 +89,23 @@ public class MemberService {
                         .build();
     }
 
+    public MemberDto withdraw(WithdrawRequestDto request) {
+        Member member = getMemberByMemberId(request.getId());
+
+        if (!member.getPassword().equals(encodePassword(request.getPassword()))) {
+            throw new ClientException(ErrorCode.INVALID_PASSWORD);
+        }
+
+        member.setUseYn(false);
+
+        memberRepository.save(member);
+
+        return MemberDto.builder()
+                        .id(member.getMemberId())
+                        .name(member.getName())
+                        .build();
+    }
+
     private String encodePassword(String password) {
         return Base64.encodeBase64String(password.getBytes(StandardCharsets.UTF_8));
     }

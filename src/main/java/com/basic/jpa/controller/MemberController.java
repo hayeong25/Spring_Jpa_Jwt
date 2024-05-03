@@ -53,6 +53,14 @@ public class MemberController {
     }
 
     /*
+     * 회원 탈퇴
+     */
+    @PutMapping("/withdraw")
+    public ResponseEntity<MemberDto> withdraw(@RequestBody @Valid WithdrawRequestDto request) {
+        return ResponseEntity.ok(memberService.withdraw(request));
+    }
+
+    /*
      * JWT access token으로 ID 가져오기
      */
     private static String getMemberId(HttpServletRequest request) {

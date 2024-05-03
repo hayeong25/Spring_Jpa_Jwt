@@ -45,4 +45,13 @@ public class MemberRequestDto {
         @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@!%*#?&])[A-Za-z\\d@!%*#?&]{8,}$", message = "영문, 숫자, 특수문자 포함 8~16자여야 합니다.")
         private String newPassword;
     }
+
+    @Getter
+    @Setter
+    public static class WithdrawRequestDto {
+        @NotBlank
+        private String id;
+        @NotBlank
+        private String password;
+    }
 }
