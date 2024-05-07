@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ledger")
@@ -31,7 +28,7 @@ public class LedgerController {
     /*
      * 가계부 수정
      */
-    @PostMapping("/modify")
+    @PutMapping("/modify")
     public ResponseEntity<LedgerDto> modifyLedger(@RequestBody @Valid ModifyRequestDto request, HttpServletRequest servletRequest) {
         String memberId = JwtToken.getMemberId(servletRequest);
         return ResponseEntity.ok(ledgerService.modifyLedger(request, memberId));
@@ -40,7 +37,7 @@ public class LedgerController {
     /*
      * 가계부 삭제
      */
-    @PostMapping("/remove")
+    @DeleteMapping("/remove")
     public ResponseEntity<LedgerDto> removeLedger(@RequestBody @Valid RemoveRequestDto request, HttpServletRequest servletRequest) {
         String memberId = JwtToken.getMemberId(servletRequest);
         return ResponseEntity.ok(ledgerService.removeLedger(request, memberId));
