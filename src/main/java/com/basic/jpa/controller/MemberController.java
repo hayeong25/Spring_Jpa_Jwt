@@ -3,9 +3,7 @@ package com.basic.jpa.controller;
 import com.basic.jpa.dto.MemberDto;
 import com.basic.jpa.dto.MemberRequestDto.*;
 import com.basic.jpa.service.MemberService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
+import com.basic.jpa.util.JwtToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class MemberController {
      */
     @GetMapping("/detail")
     public ResponseEntity<MemberDto> getMemberInfo(HttpServletRequest servletRequest) {
-        String memberId = getMemberId(servletRequest);
+        String memberId = JwtToken.getMemberId(servletRequest);
         return ResponseEntity.ok(memberService.getMemberInfo(memberId));
     }
 
@@ -58,15 +56,5 @@ public class MemberController {
     @PutMapping("/withdraw")
     public ResponseEntity<MemberDto> withdraw(@RequestBody @Valid WithdrawRequestDto request) {
         return ResponseEntity.ok(memberService.withdraw(request));
-    }
-
-    /*
-     * JWT access token으로 ID 가져오기
-     */
-    private static String getMemberId(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        token = token.replaceFirst("Bearer", "");
-        Jws<Claims> jws = Jwts.parser().build().parseSignedClaims(token);
-        return jws.getPayload().get("id").toString();
     }
 }
