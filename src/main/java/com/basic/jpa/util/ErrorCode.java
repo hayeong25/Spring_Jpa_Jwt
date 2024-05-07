@@ -19,6 +19,9 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.FORBIDDEN, "C0005", "유효하지 않은 토큰입니다"),
     EXPIRED_TOKEN(HttpStatus.FORBIDDEN, "C0006", "만료된 토큰입니다"),
 
+    INVALID_LEDGER(HttpStatus.NOT_FOUND, "C1001", "존재하지 않는 가계부입니다"),
+    NOT_OWNER(HttpStatus.FORBIDDEN, "C1002", "가계부 소유주가 아닙니다"),
+
     SELECT_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "D0001", "데이터 조회 실패"),
     INSERT_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "D0002", "데이터 저장 실패"),
     UPDATE_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "D0003", "데이터 수정 실패"),
