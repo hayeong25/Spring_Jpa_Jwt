@@ -18,6 +18,7 @@ public enum ErrorCode {
     INVALID_ACCOUNT(HttpStatus.FORBIDDEN, "C0004", "유효하지 않은 계정입니다"),
     INVALID_TOKEN(HttpStatus.FORBIDDEN, "C0005", "유효하지 않은 토큰입니다"),
     EXPIRED_TOKEN(HttpStatus.FORBIDDEN, "C0006", "만료된 토큰입니다"),
+    UNAUTHORIZED_REQUEST(HttpStatus.UNAUTHORIZED, "C0007", "접근 권한이 없습니다"),
 
     INVALID_LEDGER(HttpStatus.NOT_FOUND, "C1001", "존재하지 않는 가계부입니다"),
     NOT_OWNER(HttpStatus.FORBIDDEN, "C1002", "가계부 소유주가 아닙니다"),

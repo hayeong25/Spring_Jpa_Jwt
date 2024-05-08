@@ -1,13 +1,13 @@
 package com.basic.jpa.controller;
 
+import com.basic.jpa.dto.AuthDto;
 import com.basic.jpa.dto.MemberDto;
 import com.basic.jpa.dto.MemberRequestDto.*;
 import com.basic.jpa.service.MemberService;
-import com.basic.jpa.util.JwtToken;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,9 +37,8 @@ public class MemberController {
      * 회원 정보 가져오기
      */
     @GetMapping("/detail")
-    public ResponseEntity<MemberDto> getMemberInfo(HttpServletRequest servletRequest) {
-        String memberId = JwtToken.getMemberId(servletRequest);
-        return ResponseEntity.ok(memberService.getMemberInfo(memberId));
+    public ResponseEntity<MemberDto> getMemberInfo(@AuthenticationPrincipal AuthDto auth) {
+        return ResponseEntity.ok(memberService.getMemberInfo(auth.getMember().getMemberId()));
     }
 
     /*
